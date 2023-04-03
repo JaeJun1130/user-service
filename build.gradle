@@ -6,7 +6,9 @@ plugins {
 
 group = 'com.msa'
 version = '0.0.1-SNAPSHOT'
+
 sourceCompatibility = '17'
+targetCompatibility = '17'
 
 configurations {
     compileOnly {
@@ -40,4 +42,11 @@ dependencyManagement {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+bootRun {
+    if (project.hasProperty('args')) {
+        args project.args.split(',')
+    }
+    systemProperty 'server.port', '9004' //bootRun 으로 9004 port로 실행.
 }
